@@ -29,7 +29,7 @@ public class GameRunner {
     }
 
     public void roomHas(String... items) {
-        assertThat(game.namesOfItemsInRoom(), containsInAnyOrder(items));
+        assertThat(game.namesOfItemsInCurrentRoom(), containsInAnyOrder(items));
     }
 
     public void youHave(String... items) {

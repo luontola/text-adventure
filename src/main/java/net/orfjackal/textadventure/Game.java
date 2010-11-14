@@ -23,10 +23,11 @@ public class Game {
         return currentRoom.possibleDirections();
     }
 
-    public void move(String direction) {
+    public String move(String direction) {
+        return "";
     }
 
-    public List<String> namesOfItemsInRoom() {
+    public List<String> namesOfItemsInCurrentRoom() {
         return currentRoom.namesOfItemsInRoom();
     }
 
@@ -34,12 +35,18 @@ public class Game {
         return Collections.unmodifiableList(itemsPlayerHas);
     }
 
-    public void pickUp(String item) {
+    public String pickUp(String item) {
         String pickedUp = currentRoom.takeItem(item);
-        itemsPlayerHas.add(pickedUp);
+        if (pickedUp != null) {
+            itemsPlayerHas.add(pickedUp);
+            return "You picked up " + item + ".";
+        } else {
+            return "There is no " + item + ".";
+        }
     }
 
-    public void use(String item) {
+    public String use(String item) {
+        return "";
     }
 
     public boolean hasEnded() {

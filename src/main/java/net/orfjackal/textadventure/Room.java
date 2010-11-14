@@ -29,13 +29,15 @@ public class Room {
         return Collections.unmodifiableList(items);
     }
 
-    public Room eastOf(Room other) {
-        // TODO: add opposite direction to this room
-        other.possibleDirections.add("east");
+    public Room eastOf(Room that) {
+        that.possibleDirections.add("east");
+        this.possibleDirections.add("west");
         return this;
     }
 
-    public Room southOf(Room other) {
+    public Room southOf(Room that) {
+        that.possibleDirections.add("south");
+        this.possibleDirections.add("north");
         return this;
     }
 
@@ -44,8 +46,9 @@ public class Room {
     }
 
     public String takeItem(String item) {
-        // TODO: do not remove items not in the room
-        items.remove(item);
-        return item;
+        if (items.remove(item)) {
+            return item;
+        }
+        return null;
     }
 }
