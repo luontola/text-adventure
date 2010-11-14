@@ -43,9 +43,9 @@ public class GameTest {
         game.canMoveTo("north");
         game.roomHas("tool bench");
 
-//        game.use("tool bench");
-//        game.youHave("robot");
-//
+        game.use("tool bench");
+        game.youHave("robot");
+
 //        game.theEnd();
     }
 
@@ -120,4 +120,6 @@ public class GameTest {
         assertThat("message to player", message, containsString("no item"));
         assertThat("items owned after", game.namesOfItemsOwned(), not(contains("item")));
     }
+
+    // TODO: immovable items - cannot pick up tool bench
 }

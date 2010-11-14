@@ -52,7 +52,27 @@ public class Game {
     }
 
     public String use(String item) {
-        return "";
+        // TODO: extract tool bench specific stuff
+        if (!namesOfItemsInCurrentRoom().contains(item)) {
+            return "There is no " + item + ".";
+        }
+        if (!item.equals("tool bench")) {
+            return "You cannot use " + item + ".";
+        }
+        if (!namesOfItemsOwned().contains("legs")) {
+            return "First you need legs.";
+        }
+        if (!namesOfItemsOwned().contains("torso")) {
+            return "First you need torso.";
+        }
+        if (!namesOfItemsOwned().contains("head")) {
+            return "First you need head.";
+        }
+        itemsPlayerHas.remove("legs");
+        itemsPlayerHas.remove("torso");
+        itemsPlayerHas.remove("head");
+        itemsPlayerHas.add("robot");
+        return "You used tool bench to create a robot from your other items.";
     }
 
     public boolean hasEnded() {
