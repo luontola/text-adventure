@@ -25,7 +25,7 @@ public class GameRunner {
     }
 
     public void move(String direction) {
-        game.move(direction);
+        game.moveTo(direction);
     }
 
     public void roomHas(String... items) {

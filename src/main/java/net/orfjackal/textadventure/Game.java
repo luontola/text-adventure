@@ -19,12 +19,18 @@ public class Game {
         return currentRoom.getDescription();
     }
 
-    public List<String> possibleDirections() {
+    public Collection<String> possibleDirections() {
         return currentRoom.possibleDirections();
     }
 
-    public String move(String direction) {
-        return "";
+    public String moveTo(String direction) {
+        Room next = currentRoom.roomTo(direction);
+        if (next != null) {
+            currentRoom = next;
+            return "You moved east.";
+        } else {
+            return "There is a wall in south and it blocks your way.";
+        }
     }
 
     public List<String> namesOfItemsInCurrentRoom() {
