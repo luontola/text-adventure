@@ -76,6 +76,7 @@ public class Game {
     }
 
     public boolean hasEnded() {
-        return false;
+        // TODO: extract ending condition
+        return itemsPlayerHas.contains("robot");
     }
 }

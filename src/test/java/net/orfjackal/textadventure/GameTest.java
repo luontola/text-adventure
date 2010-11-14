@@ -46,7 +46,7 @@ public class GameTest {
         game.use("tool bench");
         game.youHave("robot");
 
-//        game.theEnd();
+        game.theEnd();
     }
 
     @Test

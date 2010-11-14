@@ -16,7 +16,7 @@ public class GameRunner {
     }
 
     public void showsDescription(String description) {
-        assertFalse("game should be running", game.hasEnded());
+        gameContinues();
         assertThat(game.descriptionOfCurrentRoom(), is(description));
     }
 
@@ -42,6 +42,10 @@ public class GameRunner {
 
     public void use(String item) {
         game.use(item);
+    }
+
+    public void gameContinues() {
+        assertFalse("game should be running", game.hasEnded());
     }
 
     public void theEnd() {
