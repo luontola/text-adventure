@@ -16,9 +16,8 @@ public class GameTest {
         Room room1 = new Room("You are in a big room.").withItems("legs");
         Room room2 = new Room("You are in a small room.").withItems("torso", "head").eastOf(room1);
         Room room3 = new Room("You are in a factory.").withItems("tool bench").southOf(room2);
-        Game world = new Game(room1);
 
-        GameRunner game = new GameRunner(world);
+        GameRunner game = new GameRunner(new Game(room1));
 
         game.showsDescription("You are in a big room.");
         game.canMoveTo("east");
@@ -75,7 +74,7 @@ public class GameTest {
 
         assertThat("room before", game.descriptionOfCurrentRoom(), is("room1"));
 
-        String message = game.moveTo("east");
+        String message = game.move("east");
 
         assertThat("message to player", message, containsString("moved east"));
         assertThat("room after", game.descriptionOfCurrentRoom(), is("room2"));
@@ -89,7 +88,7 @@ public class GameTest {
 
         assertThat("room before", game.descriptionOfCurrentRoom(), is("room1"));
 
-        String message = game.moveTo("south");
+        String message = game.move("south");
 
         assertThat("message to player", message, containsString("wall in south"));
         assertThat("room after", game.descriptionOfCurrentRoom(), is("room1"));

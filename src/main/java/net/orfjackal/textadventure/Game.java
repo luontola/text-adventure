@@ -6,7 +6,7 @@ import java.util.*;
  * @author Esko Luontola
  * @since 14.11.2010
  */
-public class Game {
+public class Game implements Commands {
 
     private Room currentRoom;
     private final List<String> itemsPlayerHas = new ArrayList<String>();
@@ -23,7 +23,7 @@ public class Game {
         return currentRoom.possibleDirections();
     }
 
-    public String moveTo(String direction) {
+    public String move(String direction) {
         Room next = currentRoom.roomTo(direction);
         if (next != null) {
             currentRoom = next;
