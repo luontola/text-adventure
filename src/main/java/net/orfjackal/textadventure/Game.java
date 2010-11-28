@@ -11,10 +11,12 @@ import java.util.Collection;
 public class Game implements Commands {
 
     private Room currentRoom;
+    private final EndingCondition endingCondition;
     private final Inventory player = new Inventory();
 
-    public Game(Room startingRoom) {
+    public Game(Room startingRoom, EndingCondition endingCondition) {
         this.currentRoom = startingRoom;
+        this.endingCondition = endingCondition;
     }
 
     public String descriptionOfCurrentRoom() {
@@ -63,7 +65,6 @@ public class Game implements Commands {
     }
 
     public boolean hasEnded() {
-        // TODO: extract ending condition
-        return player.hasItemNamed("robot");
+        return endingCondition.hasEnded(player);
     }
 }

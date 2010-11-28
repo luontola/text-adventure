@@ -11,6 +11,7 @@ import static org.hamcrest.Matchers.*;
  * @since 14.11.2010
  */
 public class GameTest {
+    private static final EndingCondition NO_END = null;
 
     @Test
     public void full_story() {
@@ -23,7 +24,7 @@ public class GameTest {
         Room room2 = new Room("You are in a small room.").withItems(torso, head).eastOf(room1);
         Room room3 = new Room("You are in a factory.").withItems(toolBench).southOf(room2);
 
-        GameRunner game = new GameRunner(new Game(room1));
+        GameRunner game = new GameRunner(new Game(room1, new GameEndsWhenPlayerHasARobot()));
 
         game.showsDescription("You are in a big room.");
         game.canMoveTo("east");
@@ -76,7 +77,7 @@ public class GameTest {
     public void can_move_to_adjacent_rooms() {
         Room room1 = new Room("room1");
         Room room2 = new Room("room2").eastOf(room1);
-        Game game = new Game(room1);
+        Game game = new Game(room1, NO_END);
 
         assertThat("room before", game.descriptionOfCurrentRoom(), is("room1"));
 
@@ -90,7 +91,7 @@ public class GameTest {
     public void cannot_move_to_where_there_are_no_rooms() {
         Room room1 = new Room("room1");
         Room room2 = new Room("room2").eastOf(room1);
-        Game game = new Game(room1);
+        Game game = new Game(room1, NO_END);
 
         assertThat("room before", game.descriptionOfCurrentRoom(), is("room1"));
 
@@ -102,7 +103,7 @@ public class GameTest {
 
     @Test
     public void picking_up_an_item_removes_it_from_the_room() {
-        Game game = new Game(new Room("room").withItems(new Item("item")));
+        Game game = new Game(new Room("room").withItems(new Item("item")), NO_END);
 
         assertThat("items in room before", game.namesOfItemsInCurrentRoom(), contains("item"));
         assertThat("items owned before", game.namesOfItemsOwned(), not(contains("item")));
@@ -116,7 +117,7 @@ public class GameTest {
 
     @Test
     public void cannot_pick_items_which_are_not_in_the_room() {
-        Game game = new Game(new Room("room"));
+        Game game = new Game(new Room("room"), NO_END);
 
         assertThat("items owned before", game.namesOfItemsOwned(), not(contains("item")));
 

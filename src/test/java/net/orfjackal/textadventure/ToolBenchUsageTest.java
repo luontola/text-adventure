@@ -12,12 +12,14 @@ import static org.hamcrest.Matchers.*;
  */
 public class ToolBenchUsageTest {
 
+    private static final EndingCondition NO_END = null;
+
     private static Game oneRoomWithItemsForARobot() {
         Item legs = new Item("legs");
         Item torso = new Item("torso");
         Item head = new Item("head");
         Item toolBench = new ToolBench();
-        return new Game(new Room("room").withItems(legs, torso, head, toolBench));
+        return new Game(new Room("room").withItems(legs, torso, head, toolBench), NO_END);
     }
 
     @Test
@@ -37,7 +39,7 @@ public class ToolBenchUsageTest {
 
     @Test
     public void cannot_use_items_not_meant_to_be_used() {
-        Game game = new Game(new Room("room").withItems(new Item("unusable thing")));
+        Game game = new Game(new Room("room").withItems(new Item("unusable thing")), NO_END);
 
         String message = game.use("unusable thing");
 
@@ -46,7 +48,7 @@ public class ToolBenchUsageTest {
 
     @Test
     public void cannot_use_items_not_in_the_room() {
-        Game game = new Game(new Room("room"));
+        Game game = new Game(new Room("room"), NO_END);
 
         String message = game.use("tool bench");
 

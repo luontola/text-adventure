@@ -1,6 +1,6 @@
 package net.orfjackal.textadventure.ui;
 
-import net.orfjackal.textadventure.Game;
+import net.orfjackal.textadventure.*;
 import net.orfjackal.textadventure.domain.*;
 
 import java.util.*;
@@ -20,7 +20,7 @@ public class TextUI {
         Room room1 = new Room("You are in a big room.").withItems(legs);
         Room room2 = new Room("You are in a small room.").withItems(torso, head).eastOf(room1);
         Room room3 = new Room("You are in a factory.").withItems(toolBench).southOf(room2);
-        Game game = new Game(room1);
+        Game game = new Game(room1, new GameEndsWhenPlayerHasARobot());
         CommandParser parser = new CommandParser(game);
 
         Scanner in = new Scanner(System.in);
