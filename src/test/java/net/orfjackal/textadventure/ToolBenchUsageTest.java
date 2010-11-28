@@ -1,5 +1,6 @@
 package net.orfjackal.textadventure;
 
+import net.orfjackal.textadventure.domain.*;
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;

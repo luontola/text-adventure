@@ -1,4 +1,4 @@
-package net.orfjackal.textadventure;
+package net.orfjackal.textadventure.domain;
 
 import java.util.*;
 

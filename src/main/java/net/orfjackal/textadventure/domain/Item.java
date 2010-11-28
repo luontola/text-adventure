@@ -1,4 +1,4 @@
-package net.orfjackal.textadventure;
+package net.orfjackal.textadventure.domain;
 
 /**
  * @author Esko Luontola

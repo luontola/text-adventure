@@ -1,5 +1,7 @@
 package net.orfjackal.textadventure;
 
+import net.orfjackal.textadventure.domain.*;
+
 import java.util.Collection;
 
 /**

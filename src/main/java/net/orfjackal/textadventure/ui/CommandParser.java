@@ -1,4 +1,6 @@
-package net.orfjackal.textadventure;
+package net.orfjackal.textadventure.ui;
+
+import net.orfjackal.textadventure.Commands;
 
 /**
  * @author Esko Luontola

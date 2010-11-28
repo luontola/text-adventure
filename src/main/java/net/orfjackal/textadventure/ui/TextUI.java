@@ -1,4 +1,7 @@
-package net.orfjackal.textadventure;
+package net.orfjackal.textadventure.ui;
+
+import net.orfjackal.textadventure.Game;
+import net.orfjackal.textadventure.domain.*;
 
 import java.util.*;
 

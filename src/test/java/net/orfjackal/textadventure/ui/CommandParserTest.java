@@ -1,5 +1,6 @@
-package net.orfjackal.textadventure;
+package net.orfjackal.textadventure.ui;
 
+import net.orfjackal.textadventure.Commands;
 import org.junit.*;
 
 import static org.hamcrest.MatcherAssert.assertThat;
