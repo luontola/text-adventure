@@ -1,5 +1,6 @@
 package net.orfjackal.textadventure.domain;
 
+import javax.annotation.Nullable;
 import java.util.*;
 
 /**
@@ -14,9 +15,12 @@ public class Inventory {
         inventory.put(item.getName(), item);
     }
 
-    /**
-     * Returns the item, or null if doesn't have it.
-     */
+    @Nullable
+    public Item getItemNamed(String name) {
+        return inventory.get(name);
+    }
+
+    @Nullable
     public Item takeItemNamed(String name) {
         return inventory.remove(name);
     }

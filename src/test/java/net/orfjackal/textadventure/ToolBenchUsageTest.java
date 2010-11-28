@@ -16,7 +16,7 @@ public class ToolBenchUsageTest {
         Item legs = new Item("legs");
         Item torso = new Item("torso");
         Item head = new Item("head");
-        Item toolBench = new Item("tool bench");
+        Item toolBench = new ToolBench();
         return new Game(new Room("room").withItems(legs, torso, head, toolBench));
     }
 

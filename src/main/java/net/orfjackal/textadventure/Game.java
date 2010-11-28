@@ -54,27 +54,14 @@ public class Game implements Commands {
     }
 
     public String use(String itemName) {
-        // TODO: extract tool bench specific stuff
-        if (!namesOfItemsInCurrentRoom().contains(itemName)) {
+        Item item = currentRoom.getItem(itemName);
+        if (item == null) {
             return "There is no " + itemName + ".";
         }
-        if (!itemName.equals("tool bench")) {
+        if (!item.isUsable()) {
             return "You cannot use " + itemName + ".";
         }
-        if (!player.hasItemNamed("legs")) {
-            return "First you need legs.";
-        }
-        if (!player.hasItemNamed("torso")) {
-            return "First you need torso.";
-        }
-        if (!player.hasItemNamed("head")) {
-            return "First you need head.";
-        }
-        player.takeItemNamed("legs");
-        player.takeItemNamed("torso");
-        player.takeItemNamed("head");
-        player.putItem(new Item("robot"));
-        return "You used tool bench to create a robot from your other items.";
+        return item.useOn(player);
     }
 
     public boolean hasEnded() {

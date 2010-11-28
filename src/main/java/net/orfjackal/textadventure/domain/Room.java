@@ -1,5 +1,6 @@
 package net.orfjackal.textadventure.domain;
 
+import javax.annotation.Nullable;
 import java.util.*;
 
 /**
@@ -31,8 +32,14 @@ public class Room {
         return room.namesOfItems();
     }
 
-    public Item takeItem(String itemName) {
-        return room.takeItemNamed(itemName);
+    @Nullable
+    public Item getItem(String name) {
+        return room.getItemNamed(name);
+    }
+
+    @Nullable
+    public Item takeItem(String name) {
+        return room.takeItemNamed(name);
     }
 
     public Room eastOf(Room that) {

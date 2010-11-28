@@ -15,7 +15,7 @@ public class TextUI {
         Item legs = new Item("legs");
         Item torso = new Item("torso");
         Item head = new Item("head");
-        Item toolBench = new Item("tool bench");
+        Item toolBench = new ToolBench();
 
         Room room1 = new Room("You are in a big room.").withItems(legs);
         Room room2 = new Room("You are in a small room.").withItems(torso, head).eastOf(room1);
