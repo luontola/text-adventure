@@ -41,6 +41,8 @@ public class TextUI {
             System.out.println(message);
             System.out.println();
         }
+
+        System.out.println("The End");
     }
 
     private static void printList(String title, Collection<String> items) {
