@@ -25,6 +25,13 @@ public class Inventory {
         return inventory.remove(name);
     }
 
+    public void removeItem(Item item) {
+        boolean removed = inventory.values().remove(item);
+        if (!removed) {
+            throw new IllegalArgumentException("Did not have item: " + item);
+        }
+    }
+
     public boolean hasItemNamed(String name) {
         return inventory.containsKey(name);
     }

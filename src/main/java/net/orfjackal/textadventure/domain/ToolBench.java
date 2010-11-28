@@ -17,20 +17,46 @@ public class ToolBench extends Item {
 
     @Override
     public String useOn(Inventory player) {
-        if (!player.hasItemNamed("legs")) {
-            return "First you need legs.";
+        try {
+            Item[] robotParts = {
+                    requireItem("legs", player),
+                    requireItem("torso", player),
+                    requireItem("head", player),
+            };
+            Item robot = buildRobotOutOf(robotParts, player);
+            return "You used " + this.getName() + " to create a " + robot.getName() + " from your other items.";
+
+        } catch (RequiredItemMissingException e) {
+            return "First you need " + e.getItemName() + ".";
         }
-        if (!player.hasItemNamed("torso")) {
-            return "First you need torso.";
+    }
+
+    private static Item requireItem(String name, Inventory player) throws RequiredItemMissingException {
+        Item item = player.getItemNamed(name);
+        if (item == null) {
+            throw new RequiredItemMissingException(name);
         }
-        if (!player.hasItemNamed("head")) {
-            return "First you need head.";
+        return item;
+    }
+
+    private static Item buildRobotOutOf(Item[] robotParts, Inventory player) {
+        for (Item item : robotParts) {
+            player.removeItem(item);
         }
-        // TODO: use objects instead of the item names
-        player.takeItemNamed("legs");
-        player.takeItemNamed("torso");
-        player.takeItemNamed("head");
-        player.putItem(new Item("robot"));
-        return "You used tool bench to create a robot from your other items.";
+        Item robot = new Item("robot");
+        player.putItem(robot);
+        return robot;
+    }
+
+    private static class RequiredItemMissingException extends Exception {
+        private final String itemName;
+
+        public RequiredItemMissingException(String itemName) {
+            this.itemName = itemName;
+        }
+
+        public String getItemName() {
+            return itemName;
+        }
     }
 }
