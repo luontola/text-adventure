@@ -35,9 +35,9 @@ public class Game implements Commands {
         Room next = currentRoom.roomTo(direction);
         if (next != null) {
             currentRoom = next;
-            return "You moved east.";
+            return "You moved " + direction + ".";
         } else {
-            return "There is a wall in south and it blocks your way.";
+            return "There is a wall in " + direction + " and it blocks your way.";
         }
     }
 
