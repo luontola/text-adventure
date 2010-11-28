@@ -9,9 +9,14 @@ import java.util.*;
 public class TextUI {
 
     public static void main(String[] args) {
-        Room room1 = new Room("You are in a big room.").withItems("legs");
-        Room room2 = new Room("You are in a small room.").withItems("torso", "head").eastOf(room1);
-        Room room3 = new Room("You are in a factory.").withItems("tool bench").southOf(room2);
+        Item legs = new Item("legs");
+        Item torso = new Item("torso");
+        Item head = new Item("head");
+        Item toolBench = new Item("tool bench");
+
+        Room room1 = new Room("You are in a big room.").withItems(legs);
+        Room room2 = new Room("You are in a small room.").withItems(torso, head).eastOf(room1);
+        Room room3 = new Room("You are in a factory.").withItems(toolBench).southOf(room2);
         Game game = new Game(room1);
         CommandParser parser = new CommandParser(game);
 

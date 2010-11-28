@@ -13,9 +13,14 @@ public class GameTest {
 
     @Test
     public void full_story() {
-        Room room1 = new Room("You are in a big room.").withItems("legs");
-        Room room2 = new Room("You are in a small room.").withItems("torso", "head").eastOf(room1);
-        Room room3 = new Room("You are in a factory.").withItems("tool bench").southOf(room2);
+        Item legs = new Item("legs");
+        Item torso = new Item("torso");
+        Item head = new Item("head");
+        Item toolBench = new Item("tool bench");
+
+        Room room1 = new Room("You are in a big room.").withItems(legs);
+        Room room2 = new Room("You are in a small room.").withItems(torso, head).eastOf(room1);
+        Room room3 = new Room("You are in a factory.").withItems(toolBench).southOf(room2);
 
         GameRunner game = new GameRunner(new Game(room1));
 
@@ -96,7 +101,7 @@ public class GameTest {
 
     @Test
     public void picking_up_an_item_removes_it_from_the_room() {
-        Game game = new Game(new Room("room").withItems("item"));
+        Game game = new Game(new Room("room").withItems(new Item("item")));
 
         assertThat("items in room before", game.namesOfItemsInCurrentRoom(), contains("item"));
         assertThat("items owned before", game.namesOfItemsOwned(), not(contains("item")));

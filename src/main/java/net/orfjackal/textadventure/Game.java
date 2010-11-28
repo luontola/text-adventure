@@ -1,6 +1,6 @@
 package net.orfjackal.textadventure;
 
-import java.util.*;
+import java.util.Collection;
 
 /**
  * @author Esko Luontola
@@ -9,7 +9,7 @@ import java.util.*;
 public class Game implements Commands {
 
     private Room currentRoom;
-    private final List<String> itemsPlayerHas = new ArrayList<String>();
+    private final Inventory player = new Inventory();
 
     public Game(Room startingRoom) {
         this.currentRoom = startingRoom;
@@ -33,50 +33,50 @@ public class Game implements Commands {
         }
     }
 
-    public List<String> namesOfItemsInCurrentRoom() {
+    public Collection<String> namesOfItemsInCurrentRoom() {
         return currentRoom.namesOfItemsInRoom();
     }
 
-    public List<String> namesOfItemsOwned() {
-        return Collections.unmodifiableList(itemsPlayerHas);
+    public Collection<String> namesOfItemsOwned() {
+        return player.namesOfItems();
     }
 
-    public String pickUp(String item) {
-        String pickedUp = currentRoom.takeItem(item);
+    public String pickUp(String itemName) {
+        Item pickedUp = currentRoom.takeItem(itemName);
         if (pickedUp != null) {
-            itemsPlayerHas.add(pickedUp);
-            return "You picked up " + item + ".";
+            player.putItem(pickedUp);
+            return "You picked up " + itemName + ".";
         } else {
-            return "There is no " + item + ".";
+            return "There is no " + itemName + ".";
         }
     }
 
-    public String use(String item) {
+    public String use(String itemName) {
         // TODO: extract tool bench specific stuff
-        if (!namesOfItemsInCurrentRoom().contains(item)) {
-            return "There is no " + item + ".";
+        if (!namesOfItemsInCurrentRoom().contains(itemName)) {
+            return "There is no " + itemName + ".";
         }
-        if (!item.equals("tool bench")) {
-            return "You cannot use " + item + ".";
+        if (!itemName.equals("tool bench")) {
+            return "You cannot use " + itemName + ".";
         }
-        if (!namesOfItemsOwned().contains("legs")) {
+        if (!player.hasItemNamed("legs")) {
             return "First you need legs.";
         }
-        if (!namesOfItemsOwned().contains("torso")) {
+        if (!player.hasItemNamed("torso")) {
             return "First you need torso.";
         }
-        if (!namesOfItemsOwned().contains("head")) {
+        if (!player.hasItemNamed("head")) {
             return "First you need head.";
         }
-        itemsPlayerHas.remove("legs");
-        itemsPlayerHas.remove("torso");
-        itemsPlayerHas.remove("head");
-        itemsPlayerHas.add("robot");
+        player.takeItemNamed("legs");
+        player.takeItemNamed("torso");
+        player.takeItemNamed("head");
+        player.putItem(new Item("robot"));
         return "You used tool bench to create a robot from your other items.";
     }
 
     public boolean hasEnded() {
         // TODO: extract ending condition
-        return itemsPlayerHas.contains("robot");
+        return player.hasItemNamed("robot");
     }
 }

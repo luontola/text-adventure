@@ -11,9 +11,17 @@ import static org.hamcrest.Matchers.*;
  */
 public class ToolBenchUsageTest {
 
+    private static Game oneRoomWithItemsForARobot() {
+        Item legs = new Item("legs");
+        Item torso = new Item("torso");
+        Item head = new Item("head");
+        Item toolBench = new Item("tool bench");
+        return new Game(new Room("room").withItems(legs, torso, head, toolBench));
+    }
+
     @Test
     public void tool_bench_can_be_used_to_make_a_robot() {
-        Game game = new Game(new Room("room").withItems("legs", "torso", "head", "tool bench"));
+        Game game = oneRoomWithItemsForARobot();
         game.pickUp("legs");
         game.pickUp("torso");
         game.pickUp("head");
@@ -28,13 +36,12 @@ public class ToolBenchUsageTest {
 
     @Test
     public void cannot_use_items_not_meant_to_be_used() {
-        Game game = new Game(new Room("room").withItems("unusable thing"));
+        Game game = new Game(new Room("room").withItems(new Item("unusable thing")));
 
         String message = game.use("unusable thing");
 
         assertThat("message to player", message, containsString("cannot use unusable thing"));
     }
-
 
     @Test
     public void cannot_use_items_not_in_the_room() {
@@ -47,7 +54,7 @@ public class ToolBenchUsageTest {
 
     @Test
     public void cannot_use_tool_bench_when_missing_legs() {
-        Game game = new Game(new Room("room").withItems("legs", "torso", "head", "tool bench"));
+        Game game = oneRoomWithItemsForARobot();
         game.pickUp("torso");
         game.pickUp("head");
 
@@ -59,7 +66,7 @@ public class ToolBenchUsageTest {
 
     @Test
     public void cannot_use_tool_bench_when_missing_torso() {
-        Game game = new Game(new Room("room").withItems("legs", "torso", "head", "tool bench"));
+        Game game = oneRoomWithItemsForARobot();
         game.pickUp("legs");
         game.pickUp("head");
 
@@ -71,7 +78,7 @@ public class ToolBenchUsageTest {
 
     @Test
     public void cannot_use_tool_bench_when_missing_head() {
-        Game game = new Game(new Room("room").withItems("legs", "torso", "head", "tool bench"));
+        Game game = oneRoomWithItemsForARobot();
         game.pickUp("legs");
         game.pickUp("torso");
 

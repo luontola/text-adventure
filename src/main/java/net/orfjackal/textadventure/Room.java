@@ -10,7 +10,7 @@ public class Room {
 
     private final String description;
     private final Map<String, Room> possibleDirections = new HashMap<String, Room>();
-    private final List<String> items = new ArrayList<String>();
+    private final Inventory room = new Inventory();
 
     public Room(String description) {
         this.description = description;
@@ -20,20 +20,19 @@ public class Room {
         return description;
     }
 
-    public Room withItems(String... items) {
-        this.items.addAll(Arrays.asList(items));
+    public Room withItems(Item... items) {
+        for (Item item : items) {
+            room.putItem(item);
+        }
         return this;
     }
 
-    public List<String> namesOfItemsInRoom() {
-        return Collections.unmodifiableList(items);
+    public Collection<String> namesOfItemsInRoom() {
+        return room.namesOfItems();
     }
 
-    public String takeItem(String item) {
-        if (items.remove(item)) {
-            return item;
-        }
-        return null;
+    public Item takeItem(String itemName) {
+        return room.takeItemNamed(itemName);
     }
 
     public Room eastOf(Room that) {
