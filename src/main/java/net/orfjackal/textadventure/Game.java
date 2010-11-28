@@ -56,10 +56,8 @@ public class Game implements Commands {
     public String use(String itemName) {
         Item item = currentRoom.getItem(itemName);
         if (item == null) {
+            // TODO: replace with the null object pattern?
             return "There is no " + itemName + ".";
-        }
-        if (!item.isUsable()) {
-            return "You cannot use " + itemName + ".";
         }
         return item.useOn(player);
     }

@@ -16,12 +16,8 @@ public class Item {
         return name;
     }
 
-    public boolean isUsable() {
-        return false;
-    }
-
     public String useOn(Inventory player) {
-        throw new UnsupportedOperationException("The item " + getName() + " cannot be used.");
+        return "You cannot use " + getName() + ".";
     }
 
     @Override

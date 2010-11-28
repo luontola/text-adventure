@@ -11,11 +11,6 @@ public class ToolBench extends Item {
     }
 
     @Override
-    public boolean isUsable() {
-        return true;
-    }
-
-    @Override
     public String useOn(Inventory player) {
         try {
             Item[] robotParts = {
